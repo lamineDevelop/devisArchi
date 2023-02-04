@@ -2,9 +2,11 @@ package com.candle.devisarchi.repository;
 
 import com.candle.devisarchi.entite.Devis;
 
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.stereotype.Repository;
 
-@RepositoryRestResource(collectionResourceRel = "Devis", path = "Devis")
-public interface DevisRepository extends PagingAndSortingRepository<Devis,Integer> {
+@Repository
+public interface DevisRepository extends CrudRepository<Devis,Integer> {
 }
