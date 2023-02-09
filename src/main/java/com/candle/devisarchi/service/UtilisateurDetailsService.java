@@ -28,8 +28,4 @@ public class UtilisateurDetailsService implements UserDetailsService {
        return new org.springframework.security.core.userdetails.User(utilisateur.getUserName(),utilisateur.getPassword(),new ArrayList<>());
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return NoOpPasswordEncoder.getInstance();
-    }
 }
