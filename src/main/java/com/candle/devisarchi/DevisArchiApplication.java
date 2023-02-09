@@ -3,33 +3,44 @@ package com.candle.devisarchi;
 import com.candle.devisarchi.entite.Client;
 import com.candle.devisarchi.entite.DemandeTravaux;
 import com.candle.devisarchi.entite.Devis;
+import com.candle.devisarchi.entite.Utilisateur;
 import com.candle.devisarchi.repository.ClientRepository;
 import com.candle.devisarchi.repository.DemandeTravauxRepository;
 import com.candle.devisarchi.repository.DevisRepository;
+import com.candle.devisarchi.repository.UtilisateurRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @SpringBootApplication
 public class DevisArchiApplication {
 
-    public static void main(String[] args) {
-        ApplicationContext applicationContext = SpringApplication.run(DevisArchiApplication.class, args);
+    @Autowired
+    ClientRepository clientRepository;
+    @Autowired
+    DemandeTravauxRepository demandeTravauxRepository;
+    @Autowired
+    DevisRepository devisRepository;
 
-        ClientRepository clientRepository = applicationContext.getBean(ClientRepository.class);
-        DemandeTravauxRepository demandeTravauxRepository = applicationContext.getBean(DemandeTravauxRepository.class);
-        DevisRepository devisRepository =  applicationContext.getBean(DevisRepository.class);
+    @Autowired
+    UtilisateurRepository utilisateurRepository;
+
+    @PostConstruct
+    public void init() {
 
         Client client1 = new Client(1, "lamine1305", "17021987", "MEHIDI", "Lamine", new ArrayList<>());
         Client client2 = new Client(2, "adam1202", "28022016", "MEHIDI", "Adam", new ArrayList<>());
         List<Client> listClient = Arrays.asList(client1, client2);
-        listClient.forEach(x -> clientRepository.save(x));
-
+        clientRepository.saveAll(listClient);
 
         DemandeTravaux demandeTravaux1 = new DemandeTravaux();
         demandeTravaux1.setClient(client1);
@@ -43,6 +54,18 @@ public class DevisArchiApplication {
         devis1.setDemandeTravaux(demandeTravaux1);
 
         devisRepository.save(devis1);
+
+        List<Utilisateur> utilisateurs = Stream.of(new Utilisateur(101,"","",""),
+                new Utilisateur(102,"lamine","17021987","lamine1305@gmail.com"),
+                new Utilisateur(103,"adam","28022016","adam1305@gmail.com")
+        ).collect(Collectors.toList());
+
+        utilisateurRepository.saveAll(utilisateurs);
+    }
+
+    public static void main(String[] args) {
+        ApplicationContext applicationContext = SpringApplication.run(DevisArchiApplication.class, args);
+
         System.out.println("Bonjour ..... ");
     }
 }

@@ -2,7 +2,6 @@ package com.candle.devisarchi.controler;
 
 import com.candle.devisarchi.entite.Client;
 import com.candle.devisarchi.repository.ClientRepository;
-import com.candle.devisarchi.utils.ArchitectureException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
