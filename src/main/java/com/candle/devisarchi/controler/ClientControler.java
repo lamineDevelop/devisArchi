@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 @RestController
 @RequestMapping(path = "/client")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin("*")
 public class ClientControler {
 
     @Autowired

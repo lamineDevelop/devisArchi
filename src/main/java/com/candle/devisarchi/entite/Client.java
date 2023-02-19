@@ -19,6 +19,6 @@ public class Client {
     private String password;
     private String nom;
     private String prenom;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Devis> devis;
 }

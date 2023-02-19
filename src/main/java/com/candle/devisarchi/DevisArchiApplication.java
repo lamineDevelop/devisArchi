@@ -8,13 +8,15 @@ import com.candle.devisarchi.repository.ClientRepository;
 import com.candle.devisarchi.repository.DemandeTravauxRepository;
 import com.candle.devisarchi.repository.DevisRepository;
 import com.candle.devisarchi.repository.UtilisateurRepository;
+import com.candle.devisarchi.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import javax.annotation.PostConstruct;
+import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +24,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @SpringBootApplication
-public class DevisArchiApplication {
+public class DevisArchiApplication extends WebMvcConfigurationSupport {
 
     @Autowired
     ClientRepository clientRepository;
@@ -34,8 +36,10 @@ public class DevisArchiApplication {
     @Autowired
     UtilisateurRepository utilisateurRepository;
 
+    @Autowired
+    MailService mailService;
     @PostConstruct
-    public void init() {
+    public void init() throws MessagingException {
 
         Client client1 = new Client(1, "lamine1305", "17021987", "MEHIDI", "Lamine", new ArrayList<>());
         Client client2 = new Client(2, "adam1202", "28022016", "MEHIDI", "Adam", new ArrayList<>());
@@ -61,6 +65,15 @@ public class DevisArchiApplication {
         ).collect(Collectors.toList());
 
         utilisateurRepository.saveAll(utilisateurs);
+
+/*
+        //Envoi de mail
+        mailService.sendMail("bessaa.amirouche@outlook.fr",
+                "envoi de mail depuis le backend",
+                "contenu",
+               "C:\\Users\\PRIVE\\Documents\\factures\\doc.pdf" );
+
+ */
     }
 
     public static void main(String[] args) {
@@ -68,4 +81,5 @@ public class DevisArchiApplication {
 
         System.out.println("Bonjour ..... ");
     }
+
 }
