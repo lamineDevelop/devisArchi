@@ -2,22 +2,23 @@ package com.candle.devisarchi.controler;
 
 import com.candle.devisarchi.entite.LigneFacture;
 import com.candle.devisarchi.repository.LigneFactureRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping(path = "/ligneFacture")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin("*")
 public class LigneFactureControler {
 
     @Autowired
     LigneFactureRepository ligneFactureRepository;
-    Logger logger = Logger.getLogger(this.getClass().getName());
+    Logger logger  = LoggerFactory.getLogger(LigneFactureControler.class);
 
     @GetMapping("/all")
     public java.util.List<LigneFacture> getAllFacture() {
@@ -32,7 +33,7 @@ public class LigneFactureControler {
 
             return ResponseEntity.status(HttpStatus.OK).body("appel ok");
         } catch (Exception e) {
-            logger.warning("Erreur lors de la tentative de création de la ligne de facture " + ligneFacture.toString());
+            logger.warn("Erreur lors de la tentative de création de la ligne de facture " + ligneFacture.toString());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("erreur interne");
         }
     }
@@ -46,7 +47,7 @@ public class LigneFactureControler {
             return ResponseEntity.status(HttpStatus.OK).body("appel ok");
         } catch (
                 Exception e) {
-            logger.warning("Erreur lors de la tentative de suppression de la ligne de facture " + ligneFactureID);
+            logger.warn("Erreur lors de la tentative de suppression de la ligne de facture " + ligneFactureID);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("erreur interne");
         }
     }
@@ -59,7 +60,7 @@ public class LigneFactureControler {
 
             return ResponseEntity.status(HttpStatus.OK).body("appel ok");
         } catch (Exception e) {
-            logger.warning("Erreur lors de la tentative de la mise à jour de la ligne de facture " + ligneFacture.toString());
+            logger.warn("Erreur lors de la tentative de la mise à jour de la ligne de facture " + ligneFacture.toString());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("erreur interne");
         }
     }

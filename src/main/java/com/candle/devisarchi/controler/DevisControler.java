@@ -2,21 +2,21 @@ package com.candle.devisarchi.controler;
 
 import com.candle.devisarchi.entite.Devis;
 import com.candle.devisarchi.repository.DevisRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.logging.Logger;
-
 @RestController
 @RequestMapping(path = "/devis")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin("*")
 public class DevisControler {
 
     @Autowired
     DevisRepository devisRepository;
-    Logger logger = Logger.getLogger(this.getClass().getName());
+    Logger logger  = LoggerFactory.getLogger(DevisControler.class);
 
     @GetMapping("/all")
     public Iterable<Devis> getAllDevis() {
@@ -31,7 +31,7 @@ public class DevisControler {
 
             return ResponseEntity.status(HttpStatus.OK).body("appel ok");
         } catch (Exception e) {
-            logger.warning("Erreur lors de la tentative de création du devis " + devis.toString());
+            logger.warn("Erreur lors de la tentative de création du devis " + devis.toString());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("erreur interne");
         }
     }
@@ -44,7 +44,7 @@ public class DevisControler {
 
             return ResponseEntity.status(HttpStatus.OK).body("appel ok");
         } catch (Exception e) {
-            logger.warning("Erreur lors de la tentative de suppression du devis " + devisID);
+            logger.warn("Erreur lors de la tentative de suppression du devis " + devisID);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("erreur interne");
         }
     }
@@ -57,7 +57,7 @@ public class DevisControler {
 
             return ResponseEntity.status(HttpStatus.OK).body("appel ok");
         } catch (Exception e) {
-            logger.warning("Erreur lors de la tentative de la mise à jour du devis " + devis.toString());
+            logger.warn("Erreur lors de la tentative de la mise à jour du devis " + devis.toString());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("erreur interne");
         }
     }

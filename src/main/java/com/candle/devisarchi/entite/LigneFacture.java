@@ -12,10 +12,14 @@ import javax.persistence.*;
 @Data
 public class LigneFacture {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idLigneFacture;
     private String intituleLigne;
     private String descriptionLigne;
     private Double montantLigneAvantTTC;
     private Double montantLigneAvantHT;
+
+    @ManyToOne
+    private Facture facture;
+
 }

@@ -17,7 +17,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 
 import javax.annotation.PostConstruct;
 import javax.mail.MessagingException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,8 +40,8 @@ public class DevisArchiApplication extends WebMvcConfigurationSupport {
     @PostConstruct
     public void init() throws MessagingException {
 
-        Client client1 = new Client(1, "lamine1305", "17021987", "MEHIDI", "Lamine", new ArrayList<>());
-        Client client2 = new Client(2, "adam1202", "28022016", "MEHIDI", "Adam", new ArrayList<>());
+        Client client1 = new Client(1, "lamine1305", "17021987", "MEHIDI", "Lamine");
+        Client client2 = new Client(2, "adam1202", "28022016", "MEHIDI", "Adam");
         List<Client> listClient = Arrays.asList(client1, client2);
         clientRepository.saveAll(listClient);
 
@@ -81,5 +80,4 @@ public class DevisArchiApplication extends WebMvcConfigurationSupport {
 
         System.out.println("Bonjour ..... ");
     }
-
 }

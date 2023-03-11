@@ -12,11 +12,10 @@ import javax.persistence.*;
 @Data
 public class Devis {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idDevis;
     @ManyToOne
-    // déclaration d'une table d'association
-    @JoinTable(name = "devis_travaux", joinColumns = @JoinColumn(name = "ID_DEVIS"), inverseJoinColumns = @JoinColumn(name = "ID_DEMANDE"))
     private DemandeTravaux demandeTravaux;
     private Boolean devisValide;
+
 }

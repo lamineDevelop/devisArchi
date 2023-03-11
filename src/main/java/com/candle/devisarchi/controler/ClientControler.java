@@ -2,13 +2,14 @@ package com.candle.devisarchi.controler;
 
 import com.candle.devisarchi.entite.Client;
 import com.candle.devisarchi.repository.ClientRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping(path = "/client")
@@ -17,10 +18,13 @@ public class ClientControler {
 
     @Autowired
     ClientRepository clientRepository;
-    Logger logger = Logger.getLogger(this.getClass().getName());
+
+    Logger logger  = LoggerFactory.getLogger(ClientControler.class);
 
     @GetMapping("/all")
     public List<Client> getAllClient() {
+        logger.info("List des client ");
+
         return (List<Client>) clientRepository.findAll();
     }
 
@@ -32,7 +36,7 @@ public class ClientControler {
 
             return ResponseEntity.status(HttpStatus.OK).body("appel ok");
         } catch (Exception e) {
-            logger.warning("Erreur lors de la tentative de création du client " + client.toString());
+            logger.warn("Erreur lors de la tentative de création du client " + client.toString());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("erreur interne");
         }
     }
@@ -46,7 +50,7 @@ public class ClientControler {
 
             return ResponseEntity.status(HttpStatus.OK).body("appel ok");
         } catch (Exception e) {
-            logger.warning("Erreur lors de la tentative de suppression du client " + clientID);
+            logger.warn("Erreur lors de la tentative de suppression du client " + clientID);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("erreur interne");
         }
     }
@@ -59,7 +63,7 @@ public class ClientControler {
 
             return ResponseEntity.status(HttpStatus.OK).body("appel ok");
         } catch (Exception e) {
-            logger.warning("Erreur lors de la tentative de la mise à jour du client " + client.toString());
+            logger.warn("Erreur lors de la tentative de la mise à jour du client " + client.toString());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("erreur interne");
         }
     }

@@ -11,12 +11,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Client {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idClient;
-    private String login;
-    private String password;
-    private String nom;
-    private String prenom;
+public class TravauxProposes {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  Integer idTravaux;
+  String intitule;
+  String image;
 }

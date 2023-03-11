@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -12,15 +13,14 @@ import javax.persistence.*;
 @Data
 public class DemandeTravaux {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idDemande;
     private String intitule;
     private String detail;
     private String typeTravaux;
     @ManyToOne
-    // déclaration d'une table d'association
-    @JoinTable(name = "DEMANDE_CLIENT",
-            joinColumns = @JoinColumn(name = "ID_DEMANDE"),
-            inverseJoinColumns = @JoinColumn(name = "ID_CLIENT"))
     private Client client;
-
-}
+/*
+    ManyToMany
+    private String listDevis;
+*/}

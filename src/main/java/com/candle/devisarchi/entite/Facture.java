@@ -15,12 +15,10 @@ import java.util.List;
 @Data
 public class Facture {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idFacture;
     private Date dateFacture;
     private Double montantFacture;
     @OneToOne
     private Devis devisValide;
-    @OneToMany
-    private List<LigneFacture> ligneFacture;
 }

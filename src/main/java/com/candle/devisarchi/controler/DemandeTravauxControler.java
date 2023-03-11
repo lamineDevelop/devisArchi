@@ -2,22 +2,23 @@ package com.candle.devisarchi.controler;
 
 import com.candle.devisarchi.entite.DemandeTravaux;
 import com.candle.devisarchi.repository.DemandeTravauxRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping(path = "/demande")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin("*")
 public class DemandeTravauxControler {
 
     @Autowired
     DemandeTravauxRepository demandeTravauxRepository;
-    Logger logger = Logger.getLogger(this.getClass().getName());
+    Logger logger  = LoggerFactory.getLogger(DemandeTravauxControler.class);
 
     @GetMapping("/all")
     public List<DemandeTravaux> getAllDemandeTravaux() {
@@ -32,7 +33,7 @@ public class DemandeTravauxControler {
 
             return ResponseEntity.status(HttpStatus.OK).body("appel ok");
         } catch (Exception e) {
-            logger.warning("Erreur lors de la tentative de création d'une deannde de travaux " + demandeTravaux.toString());
+            logger.warn("Erreur lors de la tentative de création d'une deannde de travaux " + demandeTravaux.toString());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("erreur interne");
         }
     }
@@ -45,7 +46,7 @@ public class DemandeTravauxControler {
 
             return ResponseEntity.status(HttpStatus.OK).body("appel ok");
         } catch (Exception e) {
-            logger.warning("Erreur lors de la tentative de suppression d'une demande de travaux " + DemandeTravauxID);
+            logger.warn("Erreur lors de la tentative de suppression d'une demande de travaux " + DemandeTravauxID);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("erreur interne");
         }
     }
@@ -58,7 +59,7 @@ public class DemandeTravauxControler {
 
             return ResponseEntity.status(HttpStatus.OK).body("appel ok");
         } catch (Exception e) {
-            logger.warning("Erreur lors de la tentative de la mise à jour de la demande de travaux " + demande.toString());
+            logger.warn("Erreur lors de la tentative de la mise à jour de la demande de travaux " + demande.toString());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("erreur interne");
         }
     }

@@ -2,6 +2,8 @@ package com.candle.devisarchi.controler;
 
 import com.candle.devisarchi.entite.Facture;
 import com.candle.devisarchi.repository.FactureRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,16 +13,15 @@ import org.springframework.web.bind.annotation.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping(path = "/facture")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin("*")
 public class FactureControler {
 
     @Autowired
     FactureRepository factureRepository;
-    Logger logger = Logger.getLogger(this.getClass().getName());
+    Logger logger  = LoggerFactory.getLogger(FactureControler.class);
 
     @GetMapping("/all")
     public List<Facture> getAllFacture() {
@@ -35,7 +36,7 @@ public class FactureControler {
 
             return ResponseEntity.status(HttpStatus.OK).body("appel ok");
         } catch (Exception e) {
-            logger.warning("Erreur lors de la tentative de création de la facture " + facture.toString());
+            logger.warn("Erreur lors de la tentative de création de la facture " + facture.toString());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("erreur interne");
         }
     }
@@ -48,7 +49,7 @@ public class FactureControler {
 
             return ResponseEntity.status(HttpStatus.OK).body("appel ok");
         } catch (Exception e) {
-            logger.warning("Erreur lors de la tentative de suppression de la   facture " + factureID);
+            logger.warn("Erreur lors de la tentative de suppression de la   facture " + factureID);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("erreur interne");
         }
     }
@@ -61,7 +62,7 @@ public class FactureControler {
 
             return ResponseEntity.status(HttpStatus.OK).body("appel ok");
         } catch (Exception e) {
-            logger.warning("Erreur lors de la tentative de la mise à jour  de la facture " + facture.toString());
+            logger.warn("Erreur lors de la tentative de la mise à jour  de la facture " + facture.toString());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("erreur interne");
         }
     }
@@ -71,7 +72,7 @@ public class FactureControler {
         try {
             return Files.readAllBytes(Paths.get("data_architecture/data_architecture/doc_" + id + ".pdf"));
         } catch (Exception e) {
-            logger.warning("la facture demandée n'existe pas" + e.getMessage());
+            logger.warn("la facture demandée n'existe pas" + e.getMessage());
         }
         return new byte[0];
     }
@@ -81,7 +82,7 @@ public class FactureControler {
         try {
             return Files.readAllBytes(Paths.get("data_architecture/doc_" + id + ".pdf"));
         } catch (Exception e) {
-            logger.warning("la facture demandée n'existe pas " + e.getMessage());
+            logger.warn("la facture demandée n'existe pas " + e.getMessage());
         }
         return new byte[0];
     }
