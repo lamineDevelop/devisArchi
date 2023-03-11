@@ -1,0 +1,39 @@
+GET
+/devis/all
+/client/all
+/ligneFacture/all
+/facture/all
+/demande/all
+/travauxProposes/all
+/sousCategorieCategorieTravauxProposess/all
+
+POST
+/devis/create en parametre objet devis
+/client/create  en parametre objet client
+/ligneFacture/create en parametre objet ligneFacture
+/facture/create en parametre objet facture
+/demande/create en parametre objet demande
+/travauxProposes/create en parametre objet travauxProposes
+/sousCategorieCategorieTravauxProposess/create en parametre objet sousCategorieCategorieTravauxProposess
+
+PUT
+/devis/update en parametre objet devis
+/client/update  en parametre objet client
+/ligneFacture/update en parametre objet ligneFacture
+/facture/update en parametre objet facture
+/demande/update en parametre objet demande
+/travauxProposes/update en parametre objet travauxProposes
+/sousCategorieCategorieTravauxProposess/update en parametre objet sousCategorieCategorieTravauxProposess
+
+DELETE
+/devis/delete en parametre  id devis
+/client/delete   en parametre id client
+/ligneFacture/delete en parametre id ligneFacture
+/facture/delete en parametre id facture
+/demande/delete en parametre id demande
+/travauxProposes/delete en parametre id travauxProposes
+/sousCategorieCategorieTravauxProposess/delete en parametre id sousCategorieCategorieTravauxProposess
+
+
+Structure des objets 
+Faire des Get sur chacun des objets pour voire la structure
